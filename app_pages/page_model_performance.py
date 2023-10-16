@@ -1,4 +1,26 @@
 import streamlit as st
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier
+
+# Load the data
+data = pd.read_csv('jupyter_notebooks/advertising_dataset.csv')
+
+# Define features based on the dataset (inc. dummies) and exclude "status"
+model_features = [col for col in pd.get_dummies(
+    data.drop("status", axis=1)).columns]
+
+# Initialize and train a RandomForest model
+rf_model_tuned = RandomForestClassifier()
+X = pd.get_dummies(data.drop("status", axis=1))
+Y = data['status']
+rf_model_tuned.fit(X, Y)
+
+
+def make_prediction(model, input_data):
+    df = pd.DataFrame([input_data])
+    df = pd.get_dummies(df).reindex(columns=model_features, fill_value=0)
+    prediction = model.predict(df)
+    return "Converted" if prediction[0] == 1 else "Not Converted"
 
 
 def page_model_performance_body():
@@ -23,9 +45,7 @@ def page_model_performance_body():
         "in performance between the training and testing data."
     )
 
-    image_path = (
-        "assets/images/feature_importance.png"
-    )
+    image_path = "assets/images/feature_importance.png"
     st.image(image_path, caption="Feature Importance")
 
     st.write(
@@ -50,3 +70,47 @@ def page_model_performance_body():
         "higher age, have completed a significant portion of their "
         "profiles, and have shown engagement with the website."
     )
+
+    st.subheader("Predict Lead Conversion")
+
+    age = st.slider("Age", 18, 65)
+    current_occupation = st.selectbox(
+        "Current Occupation", ["Student", "Professional", "Unemployed", "Others"])
+    first_interaction = st.selectbox(
+        "First Interaction", ["Website", "Event", "Referral", "Others"])
+    profile_completed = st.slider("Profile Completion (%)", 0, 100)
+    website_visits = st.slider("Website Visits", 0, 50)
+    time_spent_on_website = st.slider(
+        "Time Spent on Website (minutes)", 0, 300)
+    page_views_per_visit = st.slider("Page Views per Visit", 0, 20)
+    last_activity = st.selectbox(
+        "Last Activity", ["Website Activity", "Phone Call", "Email", "Others"])
+    print_media_type1 = st.checkbox("Print Media Type1 - Ads in Newspapers")
+    print_media_type2 = st.checkbox("Print Media Type2 - Ads in Magazines")
+    digital_media = st.checkbox("Digital Media - Ads online")
+    educational_channels = st.checkbox(
+        "Educational Channels - Ads on forums, threads, newsletters")
+    referral = st.checkbox("Referral - referred to JWS or not")
+
+    input_data = {
+        'Age': age,
+        'Current Occupation': current_occupation,
+        'First Interaction': first_interaction,
+        'Profile Completed': profile_completed,
+        'Website Visits': website_visits,
+        'Time Spent on Website': time_spent_on_website,
+        'Page Views per Visit': page_views_per_visit,
+        'Last Activity': last_activity,
+        'Print Media Type1': print_media_type1,
+        'Print Media Type2': print_media_type2,
+        'Digital Media': digital_media,
+        'Educational Channels': educational_channels,
+        'Referral': referral
+    }
+
+    if st.button("Predict"):
+        prediction = make_prediction(rf_model_tuned, input_data)
+        st.write(f"The lead is predicted to be: {prediction}")
+
+
+page_model_performance_body()
