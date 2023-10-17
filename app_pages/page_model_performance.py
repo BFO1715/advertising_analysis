@@ -75,7 +75,9 @@ def page_model_performance_body():
 
     age = st.slider("Age", 18, 65)
     current_occupation = st.selectbox(
-        "Current Occupation", ["Student", "Professional", "Unemployed", "Others"])
+        "Current Occupation",
+        ["Student", "Professional", "Unemployed", "Others"]
+    )
     first_interaction = st.selectbox(
         "First Interaction", ["Website", "Event", "Referral", "Others"])
     profile_completed = st.slider("Profile Completion (%)", 0, 100)
