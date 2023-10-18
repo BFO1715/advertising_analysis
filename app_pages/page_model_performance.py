@@ -125,4 +125,12 @@ def page_model_performance_body():
         st.write(f"The lead is predicted to be: {prediction}")
 
 
+st.write(
+    "As evidenced above a lead who is older with a professional occupation, "
+    "high percentage profile completion and website interaction will stand a "
+    "much higher chance of conversion than those without those particular "
+    "characteristics. "
+)
+
+
 page_model_performance_body()
