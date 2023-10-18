@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 # Load the data
 data = pd.read_csv('jupyter_notebooks/advertising_dataset.csv')
 
-# Define features based on the dataset (inc. dummies) and exclude "status"
+# Define model_features based on the dataset (including dummies) and exclude the "status" column
 model_features = [col for col in pd.get_dummies(
     data.drop("status", axis=1)).columns]
 
@@ -17,6 +17,15 @@ rf_model_tuned.fit(X, Y)
 
 
 def make_prediction(model, input_data):
+    # Check the criteria
+    if (input_data['Age'] > 35 and
+        input_data['Current Occupation'] == 'Professional' and
+        input_data['Profile Completed'] > 75 and
+        input_data['Website Visits'] > 5 and
+        input_data['Page Views per Visit'] > 2 and
+            input_data['Time Spent on Website'] > 29):
+        return "Converted"
+
     df = pd.DataFrame([input_data])
     df = pd.get_dummies(df).reindex(columns=model_features, fill_value=0)
     prediction = model.predict(df)
@@ -74,10 +83,9 @@ def page_model_performance_body():
     st.subheader("Predict Lead Conversion")
 
     age = st.slider("Age", 18, 65)
+    st.write(f"Selected age: {age}")
     current_occupation = st.selectbox(
-        "Current Occupation",
-        ["Student", "Professional", "Unemployed", "Others"]
-    )
+        "Current Occupation", ["Student", "Professional", "Unemployed", "Others"])
     first_interaction = st.selectbox(
         "First Interaction", ["Website", "Event", "Referral", "Others"])
     profile_completed = st.slider("Profile Completion (%)", 0, 100)
