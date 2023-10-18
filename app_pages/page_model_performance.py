@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 # Load the data
 data = pd.read_csv('jupyter_notebooks/advertising_dataset.csv')
 
-# Define model_features based on the dataset (including dummies) and exclude the "status" column
+# Define model_features based on the dataset (inc dummies) and exclude "status"
 model_features = [col for col in pd.get_dummies(
     data.drop("status", axis=1)).columns]
 
@@ -85,7 +85,9 @@ def page_model_performance_body():
     age = st.slider("Age", 18, 65)
     st.write(f"Selected age: {age}")
     current_occupation = st.selectbox(
-        "Current Occupation", ["Student", "Professional", "Unemployed", "Others"])
+        "Current Occupation",
+        ["Student", "Professional", "Unemployed", "Others"]
+    )
     first_interaction = st.selectbox(
         "First Interaction", ["Website", "Event", "Referral", "Others"])
     profile_completed = st.slider("Profile Completion (%)", 0, 100)
