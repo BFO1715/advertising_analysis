@@ -19,8 +19,10 @@ to convert into paying customers accurately.
 - **Understand Conversion Factors:** Gain insights into critical
 factors influencing lead conversion for informed decisions.
 
-- **Create Lead Profiles:** Generate detailed profiles of leads
-with higher potential to tailor effective engagement strategies.
+- **Create Lead Profiles:** Generate profiles of leads
+with higher potential to tailor effective engagement strategies and a 
+prediction tool to allow a user to see which criteria will most likely
+convert a lead.
 
 **Approach**
 
@@ -31,7 +33,8 @@ understand its nature and structure.
 and insights through univariate and bivariate analysis.
 
 - **Model Evaluation:** Assess Decision Tree and Random Forest models
-to predict lead conversions effectively.
+to predict lead conversions effectively and create a tool to allow selection
+of criteria for likely lead conversion.
 
 JWS seeks to enhance lead management, optimize resource allocation,
 and improve lead conversion rates through this approach.
@@ -109,7 +112,7 @@ The we looked at models specifically, decision tree and random forest and evalua
 
 10. Continuous Improvement: Model evaluation is not a one-time task. It's an iterative process that allows you to continuously improve your models as you gather more data and refine your understanding of the problem.
 
-In essence, EDA lays the foundation for a successful data analysis process. It helps you uncover important aspects of your data, detect issues, and make informed decisions about preprocessing, feature selection, and modeling strategies. Whilst looking at the performance of models, such as decision tree and random forest, helps you make informed decisions about their effectiveness, guide model selection, understand their predictive capabilities, and ultimately drive better outcomes for your data analysis objectives.
+In essence, EDA lays the foundation for a successful data analysis process. It helps you uncover important aspects of your data, detect issues, and make informed decisions about preprocessing, feature selection, and modeling strategies. Whilst looking at the performance of models, such as decision tree and random forest, helps you make informed decisions about their effectiveness, guide model selection, understand their predictive capabilities, and ultimately drive better outcomes for your data analysis objectives. The prediction tool allows the user to select criteria in order 
 
 ## Dashboard Design
 
@@ -119,13 +122,16 @@ Used Balsamic Wireframes to plan the UI and design of the Streamlit dashboard:
 
 Individual pages are shown below:
 
-<img src="assets/images/bus_requirements.png" alt="Business Requirements" width="350" height="200"> <img src="assets/images/data_overview.png" alt="Data Overview" width="350" height="200"> <img src="assets/images/univariate_analysis.png" alt="Univariate Analysis" width="350" height="200"> <img src="assets/images/bivariate_analysis.png" alt="Bivariate Analysis" width="350" height="200"> <br> <img src="assets/images/decision_tree.png" alt="Decision Tree" width="350" height="200"> <img src="assets/images/random_forest.png" alt="Random Forest" width="350" height="200"> <img src="assets/images/model_performance.png" alt="Model Performance" width="350" height="200">
+<img src="assets/images/bus_requirements.png" alt="Business Requirements" width="350" height="200"> <img src="assets/images/data_overview.png" alt="Data Overview" width="350" height="200"> <img src="assets/images/univariate_analysis.png" alt="Univariate Analysis" width="350" height="200"> <img src="assets/images/bivariate_analysis.png" alt="Bivariate Analysis" width="350" height="200"> <br> <img src="assets/images/decision_tree.png" alt="Decision Tree" width="350" height="200"> <img src="assets/images/random_forest.png" alt="Random Forest" width="350" height="200"> <img src="assets/images/model_performance.png" alt="Model Performance" width="350" height="200"> <img src="assets/images/lead_prediction.png" alt="Lead Prediction" width="350" height="200">
 
 ## Testing and Bugs
 
 * The code was tested via pylint with zero errors.
-* There is sometimes a requirement to refresh the app to see the correct design with menu section and homepage, after researching and consulting with tutor it is due
-  to a communication issue between Heroku and Streamlit so cannot be resolved by amending the code. 
+* There is sometimes a requirement to clear cashe and refresh the app to see the correct design with menu section and homepage, after researching and consulting with tutor it is due to a communication issue between Heroku and Streamlit so cannot be resolved by amending the code.
+
+Testing was carried out on the prediction tool selecting criteria that would clearly satisfy a lead conversion and one that would not as evidenced below:
+
+<img src="assets/images/lead_converted.png" alt="Lead Converted" width="350" height="200"> <img src="assets/images/lead_not_converted.png" alt="Lead not Converted" width="350" height="200">
 
 ## Deployment
 ### Heroku
